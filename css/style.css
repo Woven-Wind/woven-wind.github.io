@@ -1,0 +1,379 @@
+    body{
+        margin: 0px;
+    }
+    
+    header{
+        background-color: #212529;
+    }
+
+    footer{
+        background-color: #212529;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        padding: 40px 70px;
+    }
+
+    footer h2{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-style: large;
+        color: white; 
+    }
+    
+    footer p{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-style: large;
+        color: white; 
+        margin: 0px;
+    }
+
+    a {
+        text-decoration: none; /* Removes the underline */
+        color: white; /* Changes the text color to white */
+    }
+    
+    .logo-on-the-top {
+        height: 125px;
+        margin-left: 45px;
+    }
+
+    .pagemenu{
+        position:absolute;
+        top:50px;
+        right:30px;
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;  
+        font-size: x-large;  
+        font-palette: light;
+    }
+
+    .pagemenu a {
+        margin-right: 30px; /* Adjust the value as needed */
+    }
+
+    .pagemenu a:hover{
+        color:#7AC6FF;
+    }
+    
+    .video {
+        height: 700px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+    }
+
+    .video h1 {
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-style: large;
+        color: white; 
+        position: absolute;
+        top: 55%;
+    }
+
+    #background-video {
+        z-index: -1;
+        width:100%;
+        height: auto;
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        background-size: cover; */
+    }
+    
+    .logo-on-video{
+        height: 500px;
+        position: absolute;
+        top: 12.5%;
+    }
+
+    .applynow{
+        position:absolute;
+        top:65%;
+        background-color: #7AC6FF;
+        color:white;
+        border: 0px;
+        padding: 40px 75px; /* Adjust padding as needed */
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-size: x-large; /* Adjust font size */
+        border-radius: 40px; /* Optional: Rounded corners */
+        transition: background-color 0.3s ease; /* Smooth color change on hover */
+        margin-top: 20px; /* Space between heading and button */
+    }
+
+    .applynow:hover {
+        background-color: #7ac5ff4b; /* Darker blue on hover */
+    }
+
+    .row{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+        margin-bottom: 20px;
+    }
+
+    .col{
+        display: flex;
+        width:80%;
+        justify-content: center; /* Centers items horizontally */
+        align-items: center; /* Centers items vertically */
+        flex-direction: column; /* Ensures the text is aligned vertically in a column */
+        padding-left: 10px;
+        padding-right: 10px;        
+
+    }
+
+    .col a{
+        display:flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width:100%
+    }
+
+    .teaminfo{
+        background-color: white;
+        margin: 50px;
+        margin-top: 75px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+    }
+
+    .subteaminfo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 400px;
+        height: 300px; 
+    }
+
+    .subteaminfo h2{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-size:300%;
+        font-style: large;
+        color: white; 
+        position: absolute;
+        width: 400px;
+        height:auto;
+        text-align: center;
+    }
+
+    .subteaminfo:hover h2{
+        color: transparent; 
+        position: absolute;
+    }
+
+    .subteaminfo p{
+        color: transparent; 
+        position: absolute;
+    }
+
+    .subteaminfo:hover p{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-size:150%;
+        font-style: large;
+        color: white; 
+        position: absolute;
+        width: 350px;
+        height:auto;
+        text-align: center;
+    }
+
+    .subteaminfo .infopic{
+        z-index: 0;
+        width: 400px;
+        height: 300px;
+        filter: brightness(60%);
+    }
+
+    .subteaminfo:hover .infopic{
+        filter: brightness(30%);
+    }
+
+    /* BELOW IS ABOUT US CSS*/
+    .aboutus{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+    }
+
+    .aboutusb {
+            width: 100%; /* Adjust the width as needed */
+            height: auto; /* Maintain aspect ratio */
+            border-bottom-left-radius: 50%; 
+            border-bottom-right-radius: 50%;
+            filter: brightness(50%);
+
+        
+    }
+
+    .aboutus h1{
+        position:absolute;
+        top: 50%;
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:700;
+        font-size: 500%;
+        color: white; 
+    }
+
+    .dialogue {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .dialogue h1 {
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:700;
+        font-style: xx-large;
+        color: #212529; 
+        font-size: xx-large;
+    }
+    
+    .dialogue p{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:500;
+        font-style: large;
+        color: #212529; 
+        font-size: x-large;
+        margin-right: 400px;
+        margin-left: 400px;
+        margin-bottom: 0px;
+    }
+
+    /* BELOW IS PAST PROJECTS CSS */
+
+    .pproject{
+        display:flex;
+        padding: 75px;
+        padding-bottom: 0px;
+    }
+
+    .pprojectimg{
+
+    }
+
+    .pptext{
+        display:flex;
+        flex-direction: column;
+        margin-left: 20px;
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:500;
+        font-style: large;
+        color: #212529; 
+        font-size: x-large;
+        
+    }
+
+    .pptext h2{
+        margin-bottom: 0px;
+    }
+
+    /* TEAM CSS */
+    .ourteam {
+        background-color: #7AC6FF;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        padding: 75px;
+    }
+
+    .ourteam h1 {
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:500;
+        font-size: 250%;
+        color: white; 
+        margin-bottom: 5px;
+    }
+
+    .ourteam h2 {
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:500;
+        font-size: 150%;
+        color: #212529;
+    }
+
+    .subteam {
+        margin-top: 75px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+    }
+
+    .subteam h1{
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:500;
+        font-size: 250%;
+        color: #212529; 
+    }
+
+    .subteam h2{
+        display: flex;
+        position: relative;
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight:400;
+        font-size: 125%;
+        justify-content: center;
+        align-items: center;
+        color: #212529; 
+        width:100%
+    }
+
+    .linkedin{
+        width: 25px;
+        height:auto;
+    }
+
+    .headshot{
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+    }
+
+    /* // <uniquifier>: Use a unique and descriptive class name
+    // <weight>: Use a value from 100 to 900 */
+
+    /* .league-spartan-<uniquifier> {
+        font-family: "League Spartan", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+    } */
+
