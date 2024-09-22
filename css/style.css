@@ -334,7 +334,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column; 
+        flex-direction: column;
+        font-size: 24px;
     }
 
     .subteam h1{
@@ -364,8 +365,8 @@
     }
 
     .headshot{
-        width: 250px;
-        height: 250px;
+        width: 160px;
+        height: 160px;
         border-radius: 50%;
     }
 
