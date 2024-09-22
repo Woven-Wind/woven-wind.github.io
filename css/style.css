@@ -328,6 +328,8 @@
     }
 
     .subteam {
+        margin: auto;
+        width: 33%;
         margin-top: 75px;
         display: flex;
         justify-content: center;
