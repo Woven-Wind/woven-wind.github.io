@@ -209,6 +209,42 @@
         let questions = [];
         let totalQuestions = 10;
 
+        function parseCSVLine(line) {
+            const fields = [];
+            let currentField = '';
+            let inQuotes = false;
+            let escapeNext = false;
+    
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+    
+                if (escapeNext) {
+                    currentField += char;
+                    escapeNext = false;
+                    continue;
+                }
+    
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        // Handle escaped quote
+                        currentField += '"';
+                        i++; // Skip next quote
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    fields.push(currentField.trim());
+                    currentField = '';
+                } else {
+                    currentField += char;
+                }
+            }
+    
+            // Add the last field
+            fields.push(currentField.trim());
+            return fields;
+        }
+
         async function loadQuestions() {
             try {
                 const topic = window.location.pathname.split('/')[2];
@@ -219,20 +255,14 @@
                 // Parse all questions first
                 const allQuestions = allLines.map(line => {
                     const fields = parseCSVLine(line);
-                    if (fields.length < 2) { // At least question and correct answer
+                    if (fields.length < 5) {
                         console.warn('Invalid CSV line:', line);
                         return null;
                     }
-                    
-                    // Filter out empty answers and get up to 3 incorrect
-                    const incorrect = fields.slice(2)
-                        .filter(a => a.trim() !== '')
-                        .slice(0, 3); // Maximum 3 incorrect
-    
                     return {
                         question: fields[0],
                         correct: fields[1],
-                        incorrect: incorrect
+                        incorrect: fields.slice(2, 5)
                     };
                 }).filter(q => q !== null);
     
@@ -250,35 +280,32 @@
                 questionBox.innerHTML = 'Failed to load questions. Please try again later.';
             }
         }
-    
+
         function showQuestion() {
             if (currentQuestion >= questions.length) {
                 showCompletionScreen();
                 return;
             }
-    
+
             const { question, correct, incorrect } = questions[currentQuestion];
-            const answers = [correct, ...incorrect];
-            
-            // Filter out any empty answers that might still exist
-            const validAnswers = answers.filter(a => a.trim() !== '');
+            const answers = [correct, ...incorrect.slice(0, 3)];
             
             // Shuffle answers
-            for (let i = validAnswers.length - 1; i > 0; i--) {
+            for (let i = answers.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [validAnswers[i], validAnswers[j]] = [validAnswers[j], validAnswers[i]];
+                [answers[i], answers[j]] = [answers[j], answers[i]];
             }
-    
+
             // Update UI
             questionCounter.textContent = `Question ${currentQuestion + 1}/${totalQuestions}`;
             questionBox.textContent = question;
             
-            answersContainer.innerHTML = validAnswers.map(answer => `
+            answersContainer.innerHTML = answers.map(answer => `
                 <button class="answer-btn" data-correct="${answer === correct}">
                     ${answer}
                 </button>
             `).join('');
-    
+
             // Add event listeners
             document.querySelectorAll('.answer-btn').forEach(btn => {
                 btn.addEventListener('click', handleAnswer);
