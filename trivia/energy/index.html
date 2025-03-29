@@ -68,14 +68,26 @@
 
         .answer-btn {
             padding: 20px;
-            border: none;
             border-radius: 15px;
-            background-color: #4CAF50;
+            background-color: white;
+            color: black;
+            border-width: 1px;
+            border-color: #7394C5;
             color: white;
             font-size: 1.1em;
             cursor: pointer;
             transition: all 0.3s;
             min-height: 80px;
+        }
+
+        .answer-btn:hover {
+            background-color: #7394C5;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .answer-btn:active {
+            transform: scale(0.95);
         }
 
         .answer-btn.correct {
@@ -187,6 +199,42 @@
         let score = 0;
         let questions = [];
         let totalQuestions = 10;
+
+        function parseCSVLine(line) {
+            const fields = [];
+            let currentField = '';
+            let inQuotes = false;
+            let escapeNext = false;
+    
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+    
+                if (escapeNext) {
+                    currentField += char;
+                    escapeNext = false;
+                    continue;
+                }
+    
+                if (char === '"') {
+                    if (inQuotes && line[i + 1] === '"') {
+                        // Handle escaped quote
+                        currentField += '"';
+                        i++; // Skip next quote
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    fields.push(currentField.trim());
+                    currentField = '';
+                } else {
+                    currentField += char;
+                }
+            }
+    
+            // Add the last field
+            fields.push(currentField.trim());
+            return fields;
+        }
 
         async function loadQuestions() {
             try {
