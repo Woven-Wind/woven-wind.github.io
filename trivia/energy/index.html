@@ -193,14 +193,27 @@
                 const topic = window.location.pathname.split('/')[2];
                 const response = await fetch(`/trivia/${topic}/questions.csv`);
                 const data = await response.text();
-                const allQuestions = data.split('\n').filter(line => line.trim() !== '');
+                const allLines = data.split('\n').filter(line => line.trim() !== '');
                 
+                // Parse all questions first
+                const allQuestions = allLines.map(line => {
+                    const fields = parseCSVLine(line);
+                    if (fields.length < 5) {
+                        console.warn('Invalid CSV line:', line);
+                        return null;
+                    }
+                    return {
+                        question: fields[0],
+                        correct: fields[1],
+                        incorrect: fields.slice(2, 5)
+                    };
+                }).filter(q => q !== null);
+    
                 // Randomly select questions
                 questions = [];
-                while(questions.length < 10 && allQuestions.length > 0) {
+                while(questions.length < totalQuestions && allQuestions.length > 0) {
                     const randomIndex = Math.floor(Math.random() * allQuestions.length);
-                    const [question, correct, ...incorrect] = allQuestions.splice(randomIndex, 1)[0].split(',');
-                    questions.push({ question, correct, incorrect });
+                    questions.push(allQuestions.splice(randomIndex, 1)[0]);
                 }
                 
                 totalQuestions = questions.length;
