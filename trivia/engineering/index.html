@@ -77,6 +77,8 @@
             cursor: pointer;
             transition: all 0.3s;
             min-height: 80px;
+            animation: none !important;
+            transition: none !important;
 
             display: flex;
             align-items: center;
@@ -255,14 +257,20 @@
                 // Parse all questions first
                 const allQuestions = allLines.map(line => {
                     const fields = parseCSVLine(line);
-                    if (fields.length < 5) {
+                    if (fields.length < 2) { // At least question and correct answer
                         console.warn('Invalid CSV line:', line);
                         return null;
                     }
+                    
+                    // Filter out empty answers and get up to 3 incorrect
+                    const incorrect = fields.slice(2)
+                        .filter(a => a.trim() !== '')
+                        .slice(0, 3); // Maximum 3 incorrect
+    
                     return {
                         question: fields[0],
                         correct: fields[1],
-                        incorrect: fields.slice(2, 5)
+                        incorrect: incorrect
                     };
                 }).filter(q => q !== null);
     
@@ -280,32 +288,35 @@
                 questionBox.innerHTML = 'Failed to load questions. Please try again later.';
             }
         }
-
+    
         function showQuestion() {
             if (currentQuestion >= questions.length) {
                 showCompletionScreen();
                 return;
             }
-
+    
             const { question, correct, incorrect } = questions[currentQuestion];
-            const answers = [correct, ...incorrect.slice(0, 3)];
+            const answers = [correct, ...incorrect];
+            
+            // Filter out any empty answers that might still exist
+            const validAnswers = answers.filter(a => a.trim() !== '');
             
             // Shuffle answers
-            for (let i = answers.length - 1; i > 0; i--) {
+            for (let i = validAnswers.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [answers[i], answers[j]] = [answers[j], answers[i]];
+                [validAnswers[i], validAnswers[j]] = [validAnswers[j], validAnswers[i]];
             }
-
+    
             // Update UI
             questionCounter.textContent = `Question ${currentQuestion + 1}/${totalQuestions}`;
             questionBox.textContent = question;
             
-            answersContainer.innerHTML = answers.map(answer => `
+            answersContainer.innerHTML = validAnswers.map(answer => `
                 <button class="answer-btn" data-correct="${answer === correct}">
                     ${answer}
                 </button>
             `).join('');
-
+    
             // Add event listeners
             document.querySelectorAll('.answer-btn').forEach(btn => {
                 btn.addEventListener('click', handleAnswer);
